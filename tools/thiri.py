@@ -109,10 +109,10 @@ class Sandbox:
                 for event in client.events():
                     if event.event == 'stdout' and execution:
                         log_debug(f"stdout: {event.data}")
-                        execution.logs['stdout'].append(str(base64.standard_b64decode(event.data)))
+                        execution.logs['stdout'].append(event.data)
                     elif event.event == 'stderr' and execution:
                         log_debug(f"stderr: {event.data}")
-                        execution.logs['stderr'].append(str(base64.standard_b64decode(event.data)))
+                        execution.logs['stderr'].append(event.data)
             
             # Start event listener in a separate thread
             thread = threading.Thread(target=listen_for_events, args=[execution])

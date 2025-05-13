@@ -24,7 +24,9 @@ agent = Agent(
         Write python code to use yfinance and matplotlib to generate stock graph
         data for the past year as `output.png` in the current directory. 
 
-        Ensure that you print the statistics out to the console as a table.
+        Ensure that you print the statistics out to the console as a table. Use
+        pandas to output statistics as a CSV string to STDOUT. DO NOT write the CSV
+        file to the disk.
 
         Only ONE IMAGE should be generated containing all the stock symbols
         The output file SHOULD be called `output.png`
