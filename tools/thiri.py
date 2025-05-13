@@ -5,6 +5,7 @@ import json
 import requests
 import sseclient
 import threading
+from agno.utils.log import log_info, log_debug, log_error
 
 class ThiriClient:
     def __init__(self, api_key):
@@ -93,12 +94,12 @@ class Sandbox:
         
         # Create execution object
         execution = Execution(data['execution_id'], self)
-        self.execution = execution
         
         # Handle SSE for stdout and stderr in a separate thread
         try:
-            def listen_for_events():
-                time.sleep(3)
+            def listen_for_events(execution):
+                log_info("Listening for events...")
+                time.sleep(1)
                 headers = {'X-THIRI-KEY': self.client.api_key}
                 url = self.client.url_for(f"/vms/{self.id}/gateway/executions/{data['execution_id']}/events")
                 
@@ -106,13 +107,15 @@ class Sandbox:
                 client = sseclient.SSEClient(response)
                 
                 for event in client.events():
-                    if event.event == 'stdout' and self.execution:
-                        self.execution.logs['stdout'].append(event.data)
-                    elif event.event == 'stderr' and self.execution:
-                        self.execution.logs['stderr'].append(event.data)
+                    if event.event == 'stdout' and execution:
+                        log_debug(f"stdout: {event.data}")
+                        execution.logs['stdout'].append(str(base64.standard_b64decode(event.data)))
+                    elif event.event == 'stderr' and execution:
+                        log_debug(f"stderr: {event.data}")
+                        execution.logs['stderr'].append(str(base64.standard_b64decode(event.data)))
             
             # Start event listener in a separate thread
-            thread = threading.Thread(target=listen_for_events)
+            thread = threading.Thread(target=listen_for_events, args=[execution])
             thread.daemon = True
             thread.start()
             

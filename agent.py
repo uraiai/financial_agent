@@ -12,16 +12,32 @@ agent = Agent(
         name="Financial Analysis Agent",
         model=OpenAIChat(id="gpt-4o-mini"),
         description='Help you with your financial analysis',
-        instructions='''
-        Given a company name, search for the competitors and their stock symbols. 
+        instructions=dedent('''
+        A user would ask a question about the company. In addition to answering 
+        the question, do the following.
+
+        1) Given a company name, search for the competitors and their stock symbols.
+        2) Write error free python code for analysis
+
+        <code_execution>
+
         Write python code to use yfinance and matplotlib to generate stock graph
-        data for the past year as `output.png`. 
+        data for the past year as `output.png` in the current directory. 
 
-        Prepare a report based on the top 5 news articles about the company and 
-        include the stock chart.
+        Ensure that you print the statistics out to the console as a table.
 
-        IMPORTANT: Ensure that you think before you write code. 
-        ''',
+        Only ONE IMAGE should be generated containing all the stock symbols
+        The output file SHOULD be called `output.png`
+        </code_execution>
+
+        3) Summarize the report to the user. 
+
+
+        IMPORTANT: 
+        If running code or downloading image fails, regenerate the code and attempt to download the file again.
+        You should ALWAYS write code.
+        You should THINK before you WRITE CODE.
+        '''),
         tools=[
             ThinkingTools(add_instructions=True),
             TavilyTools(),
@@ -31,7 +47,6 @@ agent = Agent(
         markdown=True,
         show_tool_calls=True,
         debug_mode=True
-
 )
 
 app = Playground(agents=[agent]).get_app()

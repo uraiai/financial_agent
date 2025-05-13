@@ -33,14 +33,9 @@ class ThiriTools(Toolkit):
 
         # Create the client
         self.client = ThiriClient(api_key=self.api_key)
+        self.sandbox = None
 
-        # Create the sandbox
-        try:
-            self.sandbox = self.client.create_sandbox()
-        except Exception as e:
-            raise ValueError(f"Could not create sandbox: {e}")
 
-        # Last execution for reference
         self.last_execution = None
 
         # Register the functions based on the parameters
@@ -61,6 +56,9 @@ class ThiriTools(Toolkit):
             str: Execution results or error message
         """
         try:
+            if self.sandbox is None:
+                self.sandbox = self.client.create_sandbox()
+                time.sleep(5)
             # Execute the code in the sandbox
             execution = self.sandbox.run_code(code)
             time.sleep(5)
@@ -78,6 +76,7 @@ class ThiriTools(Toolkit):
             if execution.logs['stderr']:
                 stderr = ''.join(execution.logs['stderr'])
                 results.append(f"STDERR:\n{stderr}")
+            print(results)
 
             return '\n'.join(results) if results else "Code executed successfully with no output."
 
