@@ -52,11 +52,16 @@ class ThiriClient:
             headers={
                 'Content-Type': 'application/json',
                 'X-THIRI-KEY': self.api_key
+            },
+            json={
+                'cpu': 2,
+                'mem_mb': 512
             }
+
         )
         
         if not response.ok:
-            raise Exception(f"Failed to create sandbox: {response.status_code} {response.reason}")
+            raise Exception(f"Failed to create sandbox: {response.status_code} {response.reason} {str(response.content)}")
         
         result = response.json()
         
