@@ -30,9 +30,16 @@ uv pip install -r requirements.txt
 python agent.py
 ```
 
-This should display the Agno playground URL. 
+Go to Agno playground URL. [https://app.agno.com/playground/agents] 
+Add an endpoint with URL `http://localhost:7777` and NAME `playground` and click on SAVE.
+Select the `Financial Analysis Agent` and type in something. 
 
-> Note: You will need the **API Key** for code execution. Sign up at [https://uraiai.com](https://uraiai.com) to get the API key.
+> Eg: Can you give me an analysis on SAP?
+
+This would give a graph and a neat summary of the competitive analysis.
+View the `agent.py` that has the prompt and system instructions.
+
+> Note: You will need the Thiri **API Key** for code execution apart from your own OpenAI and Tavily API keys. Sign up at [https://uraiai.com](https://uraiai.com) to get the API key.
 
 ## About Agno
 
