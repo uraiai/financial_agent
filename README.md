@@ -1,38 +1,39 @@
-# Financial Ananlysis Agent
+# Financial Analysis Agent
 
-Here is an example of a financial analysis agent built with Agno that uses Urai's code
-execution capabilities.
+This repository demonstrates a financial analysis agent built with [Agno](https://github.com/your-agno-link), showcasing Urai’s powerful code execution capabilities.
 
-## How does this work?
+## What This Demonstrates
 
-This agent is written to demonstrate the power of even small inexpensive models like gpt-4o-mini.
-GPT 4o-mini only takes $0.15 per million tokens in input and $0.6 for million tokens in output.
-Even such a weak model can do extremely well in code synthesis tasks in lanugages like Python and
-Typescript.
+This agent highlights how Urai’s code execution engine enables even lightweight language models like **GPT-4o-mini** to perform advanced financial analysis through code generation and execution.
 
-Here we ask for an input like `Can you analyze SAP?` and it will think with 4o and generate code 
-and produce results like downloading data from yahoo finance and producing tables and charts without
-having to pay for really expensive models like o3 which cost $10 / M tokens input and $40 / M tokens
-output. That is 66 times more expensive.
+For example, given a prompt such as `Can you analyze SAP?`, the agent dynamically generates Python code to retrieve financial data (e.g., from Yahoo Finance), then presents structured outputs like tables and charts. This is all achieved without relying on expensive models.
 
-Sign up at [https://uraiai.com](https://uraiai.com) to get notified when we release.
+Urai simplifies complex AI agent workflows by allowing language models to generate and run code in a secure, sandboxed environment. This decouples agent logic from model sophistication, enabling powerful outcomes at lower cost and higher speed.
 
-## How to run this?
+> 💡 Want early access? Sign up at [https://uraiai.com](https://uraiai.com) to get notified when we launch.
 
-Install [uv](https://github.com/astral-sh/uv) and python and clone this repository.
+## Running the Agent
 
-Create a venv. Install dependencies and run the agent.
+### Prerequisites
 
+- [uv](https://github.com/astral-sh/uv)
+- Python 3.9+
+
+### Instructions
+
+```bash
+git clone https://github.com/uraiai/financial_agent.git
+cd financial_agent
+uv venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
+python agent.py
 ```
-$ uv venv
-$ source .venv/bin/activate
-$ uv pip install -r requirements.txt
-$ python agent.py
-```
 
-This should open up the URL for you open the agent up in Agno playground. 
+This should display the Agno playground URL. 
 
-## Aside about Agno
+## About Agno
 
-Agno is a very nice agent building library. Rather than imposing itself as the framework, Agno
-provides a set of tools that you can compose to build agents. I like it very much.
+Agno is a modular agent building library. Rather than imposing itself as the framework, Agno
+provides a set of tools that you can compose to build agents. This repo shows how 
+Urai integrates seamlessly with Agno, enabling dynamic, code-driven agents that can take real actions.
