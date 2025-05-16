@@ -32,6 +32,8 @@ python agent.py
 
 This should display the Agno playground URL. 
 
+> Note: You will need the **API Key** for code execution. Sign up at [https://uraiai.com](https://uraiai.com) to get the API key.
+
 ## About Agno
 
 Agno is a modular agent building library. Rather than imposing itself as the framework, Agno
