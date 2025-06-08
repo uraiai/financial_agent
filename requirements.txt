@@ -6,3 +6,4 @@ tavily-python>=0.7.2
 fastapi>=0.115.12
 uvicorn>=0.34.2
 google-genai>=0.15.0
+anthropic>=0.52.0

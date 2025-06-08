@@ -10,7 +10,7 @@ from agno.utils.log import log_info, log_debug, log_error
 class ThiriClient:
     def __init__(self, api_key):
         self.api_key = api_key
-        self.thiri_base_url = os.environ.get('THIRI_API_BASE', 'https://api.thiri.dev/api')
+        self.thiri_base_url = os.environ.get('THIRI_API_BASE', 'https://api.thiri.dev/api/v1')
     
     def url_for(self, path):
         return f"{self.thiri_base_url}{path}"
@@ -51,7 +51,7 @@ class ThiriClient:
             self.url_for('/vms'),
             headers={
                 'Content-Type': 'application/json',
-                'X-THIRI-KEY': self.api_key
+                'X-API-KEY': self.api_key
             },
             json={
                 'cpu': 2,
