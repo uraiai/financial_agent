@@ -24,7 +24,7 @@ class ThiriClient:
         
         headers = {
             'Content-Type': 'application/json',
-            'X-THIRI-KEY': self.api_key
+            'X-API-KEY': self.api_key
         }
         
         if 'headers' in options:
@@ -85,7 +85,7 @@ class Sandbox:
             self.client.url_for(f"/vms/{self.id}/gateway/execute"),
             headers={
                 'Content-Type': 'application/json',
-                'X-THIRI-KEY': self.client.api_key
+                'X-API-KEY': self.client.api_key
             },
             json={
                 'code': code64
@@ -105,7 +105,7 @@ class Sandbox:
             def listen_for_events(execution):
                 log_info("Listening for events...")
                 time.sleep(1)
-                headers = {'X-THIRI-KEY': self.client.api_key}
+                headers = {'X-API-KEY': self.client.api_key}
                 url = self.client.url_for(f"/vms/{self.id}/gateway/executions/{data['execution_id']}/events")
                 
                 response = requests.get(url, headers=headers, stream=True)
@@ -147,7 +147,7 @@ class Execution:
             url,
             headers={
                 'Content-Type': 'application/json',
-                'X-THIRI-KEY': self.sandbox.client.api_key
+                'X-API-KEY': self.sandbox.client.api_key
             }
         )
         
