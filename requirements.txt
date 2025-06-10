@@ -7,3 +7,4 @@ fastapi>=0.115.12
 uvicorn>=0.34.2
 google-genai>=0.15.0
 anthropic>=0.52.0
+duckduckgo-search>=8.0.3

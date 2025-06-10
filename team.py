@@ -5,7 +5,8 @@ from agno.models.openai import OpenAIChat
 from agno.models.anthropic import Claude 
 from agno.models.google import Gemini
 from agno.tools.thinking import ThinkingTools
-from agno.tools.tavily import TavilyTools
+# from agno.tools.tavily import TavilyTools
+from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.playground import Playground, serve_playground_app
 from agno.team import Team
 
@@ -32,7 +33,7 @@ research_agent = Agent(
     '''),
     tools=[
         ThinkingTools(add_instructions=True),
-        TavilyTools(),
+        DuckDuckGoTools()
     ],
     markdown=True,
     show_tool_calls=True,
@@ -42,13 +43,14 @@ research_agent = Agent(
 code_agent = Agent(
     name="Code Agent",
     # model=Claude(id="claude-3-7-sonnet"),
-    model=OpenAIChat(id="gpt-4o"),
+    model=OpenAIChat(id="gpt-4o-mini"),
     description='Write and execute Python code for financial analysis',
     instructions=dedent('''
-    You are an expert python programmer.
+    You are an expert python programmer. Your job is to help the finance team with
+    programmatic analysis and visualizations using your python skills. You can use
+    libraries like yfinance, pandas and matplotlib at your disposal.
     
     today's date is {current_date}.
-
 
     When asked to analyze stocks:
     
@@ -65,6 +67,10 @@ code_agent = Agent(
     
     Only ONE IMAGE should be generated containing all the stock symbols
     The output file MUST be called `output.png`
+
+    Ensure that you output the code within `<code>` and `</code>` blocks. 
+    When calling the code execution tool ensure that you respect the capitalization appropriately send it verbatim 
+    to code execution tool.
     
     IMPORTANT:
     If running code or downloading image fails, regenerate the code and attempt to download the file again.
@@ -109,6 +115,7 @@ summary_agent = Agent(
 financial_team = Team(
     name="Financial Analysis Team",
     mode="coordinate",
+    # model=Gemini(id="gemini-2.5-pro-preview-06-05"),
     model=OpenAIChat(id="gpt-4o-mini"),
     members=[
         research_agent,
@@ -130,6 +137,8 @@ financial_team = Team(
         - Research Agent: For questions about companies, competitors, or market information
         - Code Agent: For requests requiring code execution, data analysis, or visualization
         - Financial Summary Agent: For requests to summarize or explain financial information in simple terms
+
+        If there is an error with the code agent, you should regenerate the code and attempt to download the file again.
 
         ALWAYS leverage the code writing agent to do detailed analysis.
         '''),

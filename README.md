@@ -6,11 +6,12 @@ This repository demonstrates a financial analysis agent built with [Agno](https:
 
 This agent highlights how Urai’s code execution engine enables even lightweight language models like **GPT-4o-mini** to perform advanced financial analysis through code generation and execution.
 
-For example, given a prompt such as `Can you analyze SAP?`, the agent dynamically generates Python code to retrieve financial data (e.g., from Yahoo Finance), then presents structured outputs like tables and charts. This is all achieved without relying on expensive models.
+For example, given a prompt such as `Can you analyze SAP?`, the agent dynamically generates Python code to retrieve financial data (e.g., from Yahoo Finance), then presents structured outputs like tables and charts. 
 
-Urai simplifies complex AI agent workflows by allowing language models to generate and run code in a secure, sandboxed environment. This decouples agent logic from model sophistication, enabling powerful outcomes at lower cost and higher speed.
+Urai simplifies complex AI agent workflows by allowing language models to generate and run code in a secure, sandboxed environment. This decouples agent logic from model sophistication, enabling powerful outcomes at lower cost and higher speed. 
 
-> 💡 Want early access? Sign up at [https://uraiai.com](https://uraiai.com) to get notified when we launch.
+Visit https://thiri.dev to sign up for an account and use the API key. Set the environment variable
+`THIRI_API_KEY` to use the agent or the team of agents.
 
 ## Running the Agent
 

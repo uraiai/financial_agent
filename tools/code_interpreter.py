@@ -14,15 +14,12 @@ class ThiriTools(Toolkit):
     def __init__(
         self,
         api_key: Optional[str] = None,
-        run_code: bool = True,
-        download_result: bool = True,
         **kwargs,
     ):
         """Initialize Thiri toolkit for code interpretation and running Python code in a sandbox.
 
         Args:
             api_key: Thiri API key (defaults to THIRI_API_KEY environment variable)
-            run_code: Whether to register the run_code function
             download_result: Whether to register the download_result function
         """
         super().__init__(name="thiri_tools", **kwargs)
@@ -35,15 +32,11 @@ class ThiriTools(Toolkit):
         self.client = ThiriClient(api_key=self.api_key)
         self.sandbox = None
 
-
         self.last_execution = None
 
         # Register the functions based on the parameters
-        if run_code:
-            self.register(self.run_python_code)
-
-        if download_result:
-            self.register(self.download_file_from_sandbox)
+        self.register(self.run_python_code)
+        self.register(self.download_file_from_sandbox)
 
     def run_python_code(self, code: str) -> str:
         """
